@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "target": "es5",
+        "module": "commonjs",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "checkJs": true,
+        "jsx": "react",
+        "noEmit": true,
+        "downlevelIteration": true,
+        "isolatedModules": true,
+        "strict": true,
+        "alwaysStrict": true,
+        "moduleResolution": "node",
+        "baseUrl": "./",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "build"
+    ]
+}
