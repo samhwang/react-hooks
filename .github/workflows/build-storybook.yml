@@ -1,0 +1,65 @@
+name: Build Storybook
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/build.bash
+      - .github/workflows/build-storybook.yml
+      - src/**
+      - .storybook
+      - package.json
+      - yarn.lock
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+      
+      - name: Set up Node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Set up project
+        run: yarn install
+
+      - name: Run linting
+        run: yarn lint
+
+      - name: Build storybook files
+        run: yarn build-storybook
+
+      - name: Set up git credentials
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        run: |
+          git config --local user.name "$USER_NAME"
+          git config --local user.email "$USER_EMAIL"
+      
+      - name: Deploy to GitHub Pages
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          DEPLOY_BRANCH: storybook
+        run: |
+          bash ./.github/workflows/build.bash
