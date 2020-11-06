@@ -1,8 +1,7 @@
 {
-    "name": "use-window-size",
+    "name": "@samhwang/react-hooks",
     "version": "0.0.1",
-    "description": "React hook for getting window size",
-    "main": "build/useWindowSize.js",
+    "description": "Sam's React Hooks Collection",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/samhwang/useWindowSize.git"

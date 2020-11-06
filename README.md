@@ -1,4 +1,3 @@
-# useWindowSize React Hook
+# Sam's React hooks collection
 
-React hook `useWindowSize()` that will calculate the window view size, useful for mocking mobile devices
-when testing frontend layouts.
+React hooks that I have seen over the years, all packed up in a repo for easier future reference.
