@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 
 interface WindowSizeType {
-    width: number;
-    height: number;
+  width: number;
+  height: number;
 }
 
 function getSizeCallback(isClient: boolean) {
