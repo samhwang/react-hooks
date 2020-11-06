@@ -1,7 +1,7 @@
 import { cleanup } from '@testing-library/react';
 import { renderHook, act } from '@testing-library/react-hooks';
-import useWindowSize, { getSizeCallback } from './useWindowSize';
-import type { WindowSizeType } from './useWindowSize';
+import useWindowSize, { getSizeCallback } from '.';
+import type { WindowSizeType } from '.';
 
 afterEach(() => {
   cleanup();
