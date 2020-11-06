@@ -46,6 +46,15 @@ jobs:
       - name: Run linting
         run: yarn lint
 
+      - name: Run tests
+        run: yarn test:coverage
+
+      - name: Generate Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
+
       - name: Build storybook files
         run: yarn build-storybook
 
