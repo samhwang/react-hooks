@@ -70,5 +70,6 @@ jobs:
         env:
           ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           DEPLOY_BRANCH: storybook
+          STATIC_FOLDER: storybook-static
         run: |
           bash ./.github/workflows/build.bash
