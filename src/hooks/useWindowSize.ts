@@ -43,4 +43,5 @@ function useWindowSize() {
   return windowSize;
 }
 
-export default useWindowSize;
+export { useWindowSize as default, getSizeCallback };
+export type { WindowSizeType };
