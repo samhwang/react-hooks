@@ -16,6 +16,7 @@
         "test": "jest",
         "test:coverage": "yarn test --coverage",
         "lint": "eslint src/**/*.ts src/**/*.tsx",
+        "build": "tsc",
         "storybook": "start-storybook -p 6006 --no-dll",
         "build-storybook": "build-storybook --no-dll"
     },

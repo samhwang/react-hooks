@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
         "incremental": true,
-        "target": "es5",
-        "module": "commonjs",
+        "target": "ESNext",
+        "module": "ESNext",
         "lib": [
             "dom",
             "dom.iterable",
@@ -11,7 +11,6 @@
         "allowJs": true,
         "checkJs": true,
         "jsx": "react",
-        "noEmit": true,
         "downlevelIteration": true,
         "isolatedModules": true,
         "strict": true,
@@ -21,13 +20,17 @@
         "allowSyntheticDefaultImports": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "outDir": "build",
+        "declaration": true
     },
     "include": [
         "src/**/*"
     ],
     "exclude": [
         "node_modules",
-        "build"
+        "build",
+        "src/**/*.test.ts",
+        "src/**/*.stories.tsx"
     ]
 }
