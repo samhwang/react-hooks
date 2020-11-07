@@ -1,0 +1,159 @@
+name: Build Storybook
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - .github/workflows/**
+      - src/**
+      - .storybook
+      - tsconfig.json
+      - package.json
+      - yarn.lock
+
+jobs:
+  initialize:
+    name: Initialize repo, test lint and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+      
+      - name: Set up Node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Set up project
+        run: yarn install
+
+      - name: Run linting
+        run: yarn lint
+
+      - name: Run tests
+        run: yarn test:coverage
+
+      - name: Archive test coverage artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+          retention-days: 1
+      
+      - name: Build storybook files
+        run: yarn build-storybook
+
+      - name: Archive storybook artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: storybook-static
+          path: storybook-static
+          retention-days: 1
+
+      - name: Build release files
+        run: yarn build
+
+      - name: Archive release JS artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: build
+          retention-days: 1
+    
+  upload_coveralls:
+    name: Upload test coverage data
+    runs-on: ubuntu-latest
+    needs: initialize
+    steps:
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: coverage
+          path: coverage
+
+      - name: Generate Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: ./coverage/lcov.info
+
+  deploy_storybook:
+    name: Deploy storybook
+    runs-on: ubuntu-latest
+    needs: initialize
+    steps:
+      - name: Checkout code repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Download storybook artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: storybook-static
+          path: storybook-static
+
+      - name: Set up git credentials
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        run: |
+          git config --local user.name "$USER_NAME"
+          git config --local user.email "$USER_EMAIL"
+      
+      - name: Deploy to GitHub Pages
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          DEPLOY_BRANCH: storybook
+          STATIC_FOLDER: storybook-static
+        run: |
+          bash ./.github/workflows/build-storybook.bash
+
+  deploy_release:
+    name: Deploy release
+    runs-on: ubuntu-latest
+    needs: initialize
+    steps:
+      - name: Checkout code repo
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Download release artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: build
+          path: build
+
+      - name: Set up git credentials
+        env:
+          USER_NAME: ${{ secrets.USER_NAME }}
+          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+        run: |
+          git config --local user.name "$USER_NAME"
+          git config --local user.email "$USER_EMAIL"
+
+      - name: Deploy to release branch
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          DEPLOY_BRANCH: release
+          OUTPUT_FOLDER: build
+        run: |
+          bash ./.github/workflows/build-release.bash
