@@ -4,21 +4,27 @@ import type { Meta } from '@storybook/react/types-6-0';
 import useWindowSize from '.';
 
 export const useWindowSizeDemo = () => {
-  const { width, height } = useWindowSize();
+  const {
+    innerWidth,
+    innerHeight,
+    outerWidth,
+    outerHeight,
+  } = useWindowSize();
 
   const [isMobileView, setIsMobileView] = useState(false);
 
   // This is only for demo purposes, and won't actually affect the hook's functionality.
   const maxMobileWidth = 960;
-  const isMobileWidthView = width < maxMobileWidth;
+  const isMobileWidthView = innerWidth < maxMobileWidth;
 
   useEffect(() => {
     setIsMobileView(isMobileWidthView);
-  }, [width, isMobileWidthView]);
+  }, [innerWidth, isMobileWidthView]);
 
   useEffect(() => {
-    action('window size')(`{ width: ${width}, height: ${height} }`);
-  }, [width, height]);
+    const message = `{ innerWidth: ${innerWidth}, innerHeight: ${innerHeight}, outerWidth: ${outerWidth}, outerHeight: ${outerHeight} }`;
+    action('window size')(message);
+  }, [innerWidth, innerHeight, outerWidth, outerHeight]);
 
   return (
     <>
@@ -29,10 +35,16 @@ export const useWindowSizeDemo = () => {
         {`Current view: ${isMobileView ? 'mobile' : 'desktop'}`}
       </p>
       <p>
-        {`Current width: ${width}`}
+        {`Current innerWidth: ${innerWidth}`}
       </p>
       <p>
-        {`Current height: ${height}`}
+        {`Current innerHeight: ${innerHeight}`}
+      </p>
+      <p>
+        {`Current outererWidth: ${outerWidth}`}
+      </p>
+      <p>
+        {`Current outerHeight: ${outerHeight}`}
       </p>
     </>
   );

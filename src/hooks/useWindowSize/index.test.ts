@@ -7,15 +7,24 @@ afterEach(() => {
   cleanup();
 });
 
-function setWindowSize({ width, height }: WindowSizeType) {
-  global.innerWidth = width;
-  global.innerHeight = height;
+function setWindowSize({
+  innerWidth,
+  innerHeight,
+  outerWidth,
+  outerHeight,
+}: WindowSizeType) {
+  global.innerWidth = innerWidth;
+  global.innerHeight = innerHeight;
+  global.outerWidth = outerWidth;
+  global.outerHeight = outerHeight;
 }
 
 describe('Get Window Size Callback', () => {
   const sample: WindowSizeType = {
-    width: 1920,
-    height: 1080,
+    innerWidth: 1920,
+    innerHeight: 1080,
+    outerWidth: 1920,
+    outerHeight: 1080,
   };
   setWindowSize(sample);
 
@@ -27,8 +36,10 @@ describe('Get Window Size Callback', () => {
   it('Should return null if it\'s not client', () => {
     const output: WindowSizeType = getSizeCallback(false);
     expect(output).toEqual({
-      width: 0,
-      height: 0,
+      innerWidth: 0,
+      innerHeight: 0,
+      outerWidth: 0,
+      outerHeight: 0,
     });
   });
 });
@@ -46,13 +57,17 @@ describe('useWindowSize hook', () => {
     };
 
     assertWindowSize({
-      width: 0,
-      height: 0,
+      innerWidth: 0,
+      innerHeight: 0,
+      outerWidth: 0,
+      outerHeight: 0,
     });
 
     assertWindowSize({
-      width: 1920,
-      height: 1080,
+      innerWidth: 1920,
+      innerHeight: 1080,
+      outerWidth: 1920,
+      outerHeight: 1080,
     });
   });
 });
