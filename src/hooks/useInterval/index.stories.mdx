@@ -1,0 +1,35 @@
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks";
+import { noDelay, delay0sec, delay1sec, delay5sec } from "./index.stories";
+
+<Meta title="Hooks/useInterval" />
+
+# useInterval
+
+A declarative way of using setInterval with react hook. Taken from [Dan Abramov's blog post](https://overreacted.io/making-setinterval-declarative-with-react-hooks/), and adopted it
+into TS.
+
+## Usage
+
+```typescript
+useInterval(callback, delay);
+```
+
+## Parameters
+
+| Parameter | Description                                                                  | Type          | Default    |
+| --------- | ---------------------------------------------------------------------------- | ------------- | ---------- |
+| callback  | The callback function to execute after every `delay` seconds                 | function      | `() => {}` |
+| delay     | The delay amount in miliseconds. Set this to `null` to "pause" the interval. | number / null | null       |
+
+## Return
+
+This hook does not return anything.
+
+## Example
+
+<Canvas>
+  <Story story={noDelay} />
+  <Story story={delay0sec} />
+  <Story story={delay1sec} />
+  <Story story={delay5sec} />
+</Canvas>
