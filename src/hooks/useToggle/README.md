@@ -8,7 +8,15 @@ A simple boolean toggler hook
 const [isToggled, toggle] = useToggle(initialValue);
 ```
 
-Intial value must be a boolean value, `true` or `false`. Default value is `false`.
+## Parameters
+
+| Parameter    | Description          | Type    | Default |
+| ------------ | -------------------- | ------- | ------- |
+| initialValue | initial toggle state | boolean | `false` |
+
+## Return
+
+This hook return a boolean toggle state, and a function to toggle that state.
 
 ## Example
 
@@ -17,7 +25,9 @@ export default function Component() {
   const [isToggled, toggle] = useToggle(true);
   return (
     <>
-      <button type="button" onClick={toggle}>Toggle</button>
+      <button type="button" onClick={toggle}>
+        Toggle
+      </button>
       <p>Current state: {isToggled.toString()}</p>
     </>
   );

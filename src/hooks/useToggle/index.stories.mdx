@@ -1,9 +1,11 @@
-import { Meta, Canvas, Story } from '@storybook/addon-docs/blocks';
-import { defaultOn, defaultOff } from './index.stories';
+import { Meta, Canvas, Story } from "@storybook/addon-docs/blocks";
+import { defaultOn, defaultOff } from "./index.stories";
 
 <Meta title="Hooks/useToggle" />
 
 # useToggle
+
+A simple boolean toggler hook
 
 ## Usage
 
@@ -11,7 +13,15 @@ import { defaultOn, defaultOff } from './index.stories';
 const [isToggled, toggle] = useToggle(initialValue);
 ```
 
-Intial value must be a boolean value, `true` or `false`. Default value is `false`.
+## Parameters
+
+| Parameter    | Description          | Type    | Default |
+| ------------ | -------------------- | ------- | ------- |
+| initialValue | initial toggle state | boolean | `false` |
+
+## Return
+
+This hook return a boolean toggle state, and a function to toggle that state.
 
 ## Example
 
