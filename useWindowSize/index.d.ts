@@ -1,10 +1,14 @@
 interface WindowSizeType {
-    width: number;
-    height: number;
+    innerWidth: number;
+    innerHeight: number;
+    outerWidth: number;
+    outerHeight: number;
 }
 declare function getSizeCallback(isClient: boolean): {
-    width: number;
-    height: number;
+    innerWidth: number;
+    innerHeight: number;
+    outerWidth: number;
+    outerHeight: number;
 };
 declare function useWindowSize(): WindowSizeType;
 export { useWindowSize as default, getSizeCallback };

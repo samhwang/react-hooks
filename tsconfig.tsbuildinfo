@@ -231,14 +231,24 @@
         "signature": "bc0442bf081aef1f744186372dc384f891ebdf7f3985a13788b7a7f65d353465",
         "affectsGlobalScope": true
       },
+      "../src/hooks/useEffectOnce/index.ts": {
+        "version": "d334958dc4c514c2c4bf2cc99d6b85884fc2bb28b8cddfdf7d6afc14f2066f98",
+        "signature": "adefcc5b10b67f2f3d1c76e521a50a8ed46206d3cfc830bd2f751866ad079130",
+        "affectsGlobalScope": false
+      },
+      "../src/hooks/useInterval/index.ts": {
+        "version": "d631389b4f30793935e844cb3588ecf85e68ac1ee6d8ce2a899e29fef13d0c8e",
+        "signature": "220d8b0797bcb4b242cd353055da6094202a073eb8f10bd0d83cc200733bcaeb",
+        "affectsGlobalScope": false
+      },
       "../src/hooks/useToggle/index.ts": {
         "version": "e1847ed6195db6688a74504cc0c4f066513f61bec8f2d1a0223f06343dbefc56",
         "signature": "3a4b470b0e3f23d2ed68d92a0dc6abd4fc95a5653a204dc8fccc7f2853e876e6",
         "affectsGlobalScope": false
       },
       "../src/hooks/useWindowSize/index.ts": {
-        "version": "2d332a71ff0f63341ac50d976068021d198e2d9f6f0f041afeb1a531cc946db0",
-        "signature": "80599cfc27a04977e4ebcb6915c973ffd29293a7d9dfd912a08680a02219a794",
+        "version": "5de3bad50e7b22bab0cb5c8578e9564f1dc1ccf911bb9b9ab438532893f55924",
+        "signature": "eec27a37bd4ef920a063d9d05856fb7bdc98436365296328746a8fd347141156",
         "affectsGlobalScope": false
       },
       "../node_modules/@types/anymatch/index.d.ts": {
@@ -1458,6 +1468,12 @@
       "../node_modules/pretty-format/build/index.d.ts": [
         "../node_modules/pretty-format/build/types.d.ts"
       ],
+      "../src/hooks/useEffectOnce/index.ts": [
+        "../node_modules/@types/react/index.d.ts"
+      ],
+      "../src/hooks/useInterval/index.ts": [
+        "../node_modules/@types/react/index.d.ts"
+      ],
       "../src/hooks/useToggle/index.ts": [
         "../node_modules/@types/react/index.d.ts"
       ],
@@ -1944,6 +1960,9 @@
       ],
       "../node_modules/pretty-format/build/index.d.ts": [
         "../node_modules/pretty-format/build/types.d.ts"
+      ],
+      "../src/hooks/useEffectOnce/index.ts": [
+        "../node_modules/@types/react/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -2135,6 +2154,8 @@
       "../node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "../node_modules/typescript/lib/lib.esnext.promise.d.ts",
       "../node_modules/typescript/lib/lib.esnext.string.d.ts",
+      "../src/hooks/useEffectOnce/index.ts",
+      "../src/hooks/useInterval/index.ts",
       "../src/hooks/useToggle/index.ts",
       "../src/hooks/useWindowSize/index.ts"
     ]

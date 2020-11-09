@@ -1,20 +1,35 @@
 import { useState, useEffect, useCallback } from 'react';
 
 interface WindowSizeType {
-  width: number;
-  height: number;
+  innerWidth: number,
+  innerHeight: number,
+  outerWidth: number,
+  outerHeight: number,
 }
 
 function getSizeCallback(isClient: boolean) {
   if (!isClient) {
     return {
-      width: 0,
-      height: 0,
+      innerWidth: 0,
+      innerHeight: 0,
+      outerWidth: 0,
+      outerHeight: 0,
     };
   }
 
-  const { innerWidth: width, innerHeight: height } = window;
-  return { width, height };
+  const {
+    innerWidth,
+    innerHeight,
+    outerWidth,
+    outerHeight,
+  } = window;
+
+  return {
+    innerWidth,
+    innerHeight,
+    outerWidth,
+    outerHeight,
+  };
 }
 
 function useWindowSize() {
